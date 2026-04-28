@@ -5,16 +5,29 @@ def generar_usuarios(num_usuarios):
 
     #Semuilla para generar datos aleatorios
 
-    nombres = ["Juan", "María", "Carlos", "Ana", "Luis", "Sofía", "Miguel", "Laura", "Pedro", "Lucía"]
+    nombres_h = ["Juan", "Carlos", "Luis", "Miguel", "Pedro", "Jorge", "Andrés", "Miguel", "Anderson"]
+    nombres_m = ["María", "Ana", "Sofía", "Laura", "Lucía", "Elena", "Marta", "Daniela", "Maria Alejandra"]
     apellidos = ["García", "Pérez", "López", "Martínez", "Sánchez", "Gómez", "Díaz", "Fernández", "Romero", "Vargas"]
     dominios=["gmail.com", "yahoo.com", "hotmail.com", "outlook.com", "icloud.com"]
-    roles_base = ["Admin", "Cliente", "Editor"]
+    roles_base = ["Admin", "Cliente", "Premium"]
+    generos_base = ["Masculino", "Femenino", "Otro"]
     fechaInicio=datetime(2024,1, 1)
     
 
     usuarios = []
     for i in range(num_usuarios):
-        nombre_completo=f"{random.choice(nombres)} {random.choice(apellidos)}"
+        genero = random.choice(generos_base)
+        
+        if genero == "Masculino":
+            nombre = random.choice(nombres_h)
+        elif genero == "Femenino":
+            nombre = random.choice(nombres_m)
+        else:
+            nombre = random.choice(nombres_h + nombres_m) # Mezcla para 'Otro'
+
+        apellido = random.choice(apellidos)
+        nombre_completo = f"{nombre} {apellido}"
+        
         email_base= nombre_completo.lower().replace(" ", ".")
 
         usuario={
