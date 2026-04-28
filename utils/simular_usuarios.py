@@ -43,23 +43,28 @@ def generar_usuarios(num_usuarios):
         #Inyetamos algunos errores controlados
         probabilidad_error = random.random()
 
-        if probabilidad_error < 0.20:            
-            # ERROR 1: El ID se pierde (Nulo)
+        if probabilidad_error < 0.10:            
+            # ERROR - El ID se pierde (Nulo)
+            usuario["id_usuario"] = None            
+            
+        elif probabilidad_error < 0.20:
+            # ERROR - Nombre en mayúsculas locas o con espacios extras
+            usuario["nombre_usuario"] = usuario["nombre_usuario"].upper()
+
+        elif prob < 0.30:
             usuario["id_usuario"] = None
             
-        elif probabilidad_error < 0.30:
-            # ERROR 2: Email mal formado (Sin el @ o con espacios)
-            usuario["email"] = usuario["email"].replace("@", " (at) ")
+        elif prob < 0.40:
+            usuario["genero"] = "No especificado" # Error de categoría
             
-        elif probabilidad_error < 0.45:
-            # ERROR 3: Nombre en mayúsculas locas o con espacios extras
-            usuario["nombre_usuario"] = usuario["nombre_usuario"].upper()
+        elif prob < 0.50:
+            usuario["rol"] = "Usuario_Externo" # Error de rol inválido
             
-        elif probabilidad_error < 0.65:
+        elif probabilidad_error < 0.60:
             # ERROR 4: Rol inexistente
             usuario["rol"] = random.choice(["Desconocido", "Dueño del chuzo"])
             
-        elif probabilidad_error < 0.80:
+        elif probabilidad_error < 0.70:
             # ERROR 5: Fecha fuera de rango o formato raro
             usuario["fecha_creacion"] = None
 
